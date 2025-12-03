@@ -24,8 +24,8 @@ function PrivateRoute({ children }) {
   if (loading) {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
   }
-  
-  return user ? children : <Navigate to="/login" />;
+  return children;
+  // return user ? children : <Navigate to="/login" />;
 }
 
 function AdminRoute({ children }) {
