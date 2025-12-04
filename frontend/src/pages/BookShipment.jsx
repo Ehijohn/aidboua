@@ -16,6 +16,7 @@ function BookShipment() {
   const [addresses, setAddresses] = useState([]);
   const [rates, setRates] = useState([]);
   const [selectedRate, setSelectedRate] = useState(null);
+  const [country, setCountry] = useState([]);
 
   // Location data
   // const [countries, setCountries] = useState([]);
@@ -89,18 +90,26 @@ function BookShipment() {
 
   useEffect(() => {
     fetchAddresses();
-    // fetchCountries();
   }, []);
+
+  const token = import.meta.env.VITE_TERMINAL_SK;
 
   const fetchStates = async (countryCode, type) => {
     try {
-      const res = await axios.get(`/api/addresses/states/${countryCode}`);
-      const states = res.data.states || [];
+      const res = await axios.get("/states", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: { country_code: countryCode },
+      });
+      const states = res.data;
+      console.log("states", states, countryCode, typeof countryCode);
       if (type === "pickup") {
-        setPickupStates(states);
+        setPickupStates(states?.data);
         setPickupCities([]); // Reset cities when country changes
       } else {
-        setDeliveryStates(states);
+        setDeliveryStates(states?.data);
+        console.log("DeliveryStates", deliveryStates);
         setDeliveryCities([]);
       }
     } catch (error) {
@@ -108,16 +117,28 @@ function BookShipment() {
     }
   };
 
+  useEffect(() => {
+    fetchStates();
+  }, [Countries]);
+
   const fetchCities = async (countryCode, stateCode, type) => {
     try {
-      const res = await axios.get(
-        `/api/addresses/cities/${countryCode}?state=${stateCode}`
-      );
-      const cities = res.data.cities || [];
+      const res = await axios.get(`/cities`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          country_code: countryCode,
+          state_code: stateCode,
+        },
+      });
+      const cities = res.data || [];
+
+      console.log(res.data);
       if (type === "pickup") {
-        setPickupCities(cities);
+        setPickupCities(cities?.data);
       } else {
-        setDeliveryCities(cities);
+        setDeliveryCities(cities?.data);
       }
     } catch (error) {
       console.error("Fetch cities error:", error);
@@ -544,13 +565,14 @@ function BookShipment() {
                   <select
                     className="input"
                     value={formData.pickupAddress.country}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      console.log(e?.target.value);
                       handleAddressChange(
                         "pickupAddress",
                         "country",
                         e.target.value
-                      )
-                    }
+                      );
+                    }}
                     required
                   >
                     <option value="">Select Country</option>
@@ -558,8 +580,8 @@ function BookShipment() {
                     {Array.isArray(Countries) &&
                       Countries.map((country) => (
                         <option
-                          key={country.iso2 || country.code}
-                          value={country.iso2 || country.code}
+                          key={country.country_id || country.code}
+                          value={country.isoCode || country.code}
                         >
                           {country.label || country.name}
                         </option>
@@ -799,10 +821,10 @@ function BookShipment() {
                       )
                     }
                     required
-                    disabled={!deliveryStates.length}
+                    disabled={!deliveryStates?.length}
                   >
                     <option value="">Select State</option>
-                    {deliveryStates.map((state) => (
+                    {deliveryStates?.map((state) => (
                       <option key={state.isoCode} value={state.isoCode}>
                         {state.name}
                       </option>

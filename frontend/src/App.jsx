@@ -21,9 +21,9 @@ import AdminShipments from './pages/admin/AdminShipments';
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
   
-  if (loading) {
-    return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>;
+  // }
   return children;
   // return user ? children : <Navigate to="/login" />;
 }
