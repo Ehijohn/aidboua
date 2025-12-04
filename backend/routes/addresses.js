@@ -10,7 +10,7 @@ const router = express.Router();
 // @access  Private
 router.get('/countries', protect, async (req, res) => {
   try {
-    const countries = await TerminalAfrica.countries();
+    const countries = await terminal.countries();
     res.json({ success: true, countries: countries.data || countries });
   } catch (error) {
     console.error('Get Countries Error:', error);
@@ -18,18 +18,20 @@ router.get('/countries', protect, async (req, res) => {
   }
 });
 
+
 // @route   GET /api/addresses/states/:country
 // @desc    Get states in a country
 // @access  Private
 router.get('/states/:country', protect, async (req, res) => {
   try {
-    const states = await TerminalAfrica.states(req.params.country);
+    const states = await terminal.states(req.params.country);
     res.json({ success: true, states: states.data || states });
   } catch (error) {
     console.error('Get States Error:', error);
     res.status(500).json({ success: false, message: 'Failed to get states' });
   }
 });
+
 
 // @route   GET /api/addresses/cities/:country
 // @desc    Get cities in a country
@@ -243,5 +245,6 @@ router.put('/:id/set-default', protect, async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 
 module.exports = router;
