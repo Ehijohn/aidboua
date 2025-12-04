@@ -1,0 +1,13 @@
+.admin-users { padding:20px; }
+.user-card { border:1px solid #eee; padding:8px; margin-bottom:8px; display:flex; justify-content:space-between; }
+
+@media (max-width: 768px) {
+  .admin-users {
+    padding: 1rem;
+  }
+
+  .user-card {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

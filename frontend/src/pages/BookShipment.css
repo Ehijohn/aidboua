@@ -1,0 +1,213 @@
+.book-shipment {
+  padding: 24px;
+}
+
+.book-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.steps {
+  display: flex;
+  gap: 12px;
+}
+
+.step {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #f2f4f8;
+  color: #333;
+  font-weight: 600;
+}
+
+.step.active {
+  background: #0366d6;
+  color: #fff;
+}
+
+.address-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #e3e8ef;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.input:disabled {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.input.full-width {
+  grid-column: 1 / -1;
+}
+
+select.input {
+  cursor: pointer;
+}
+
+select.input:disabled {
+  cursor: not-allowed;
+}
+
+.item-card {
+  border: 1px dashed #e3e8ef;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary { background: #0366d6; color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-danger { background: #dc3545; color: white; }
+
+.rates-list { display: flex; flex-direction: column; gap: 12px; }
+.rate-card { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-radius: 8px; cursor: pointer; border: 1px solid #e3e8ef; transition: all 0.3s ease; }
+.rate-card:hover { border-color: #0366d6; background: #f9fbff; }
+.rate-card.selected { border-color: #0366d6; background: #e9f2ff; box-shadow: 0 2px 8px rgba(3, 102, 214, 0.1); }
+.rate-info { flex: 1; display: flex; align-items: center; gap: 12px; }
+.carrier-logo { height: 40px; width: auto; }
+.rate-info h3 { margin: 0 0 4px 0; font-size: 16px; }
+.rate-duration { margin: 0; font-size: 13px; color: #666; }
+.rate-eta { margin: 2px 0 0 0; font-size: 12px; color: #999; }
+.rate-price { display: flex; flex-direction: column; align-items: flex-end; }
+.rate-price .amount { font-size: 18px; font-weight: 700; color: #0366d6; }
+
+.wallet-balance { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+.empty-state { color: #6c757d; }
+
+/* Phone input composed of a dial select and a number input, visually as one control */
+.phone-input { display: flex; gap: 8px; align-items: center; grid-column: 1 / -1; }
+.phone-input .dial-select { width: 160px; }
+.phone-input .dial-select, .phone-input input[type="tel"] { padding: 10px; border: 1px solid #e3e8ef; border-radius: 6px; font-size: 14px; }
+.phone-input input[type="tel"] { flex: 1; }
+.dial-mode-group { display:flex; gap:8px; align-items:center; }
+.custom-dial-input { width:120px; }
+
+@media (max-width: 768px) {
+  .book-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .steps {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .step {
+    font-size: 0.875rem;
+    padding: 4px 8px;
+  }
+
+  .address-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .phone-input {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .phone-input .dial-select {
+    width: 100%;
+  }
+
+  .step-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .rate-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 12px;
+  }
+
+  .rate-info {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .carrier-logo {
+    height: 32px;
+  }
+
+  .rate-info h3 {
+    font-size: 14px;
+  }
+
+  .rate-duration {
+    font-size: 12px;
+  }
+
+  .rate-eta {
+    font-size: 11px;
+  }
+
+  .rate-price {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid #e3e8ef;
+  }
+
+  .rate-price .amount {
+    font-size: 16px;
+  }
+}
